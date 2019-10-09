@@ -1,6 +1,5 @@
-// Nelson textbook scraper
-// By jaihysc
-// You acknowledge to use this at your own risk, creator (jaihysc) is not responsible for any consequences or legal repercussions
+// Nelson Textbook Scraper
+// You acknowledge to use this at your own risk, creator is not responsible for any consequences or legal repercussions
 // It is your responsibility to abide by the laws of your country of residence when using this
 
 // Run this in the console of your web browser
@@ -8,13 +7,13 @@
 function makeHttpObject() {
     try {
         return new XMLHttpRequest();
-    } catch (error) {}
+    } catch (error) { }
     try {
         return new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (error) {}
+    } catch (error) { }
     try {
         return new ActiveXObject("Microsoft.XMLHTTP");
-    } catch (error) {}
+    } catch (error) { }
 
     throw new Error("Could not create HTTP request object.");
 }
@@ -55,7 +54,7 @@ function gen_url(base_url, unit, chapter, section, ending) {
     }
 
     if (ending)
-    url += ending;
+        url += ending;
 
     url += ".pdf";
     return url;
@@ -103,10 +102,10 @@ async function download_pdf(url, validate_url, file_name) {
         }
 
         // Chapter extras
-        await download_pdf(gen_url(base_url, undefined, chapter, undefined, "_inv")    , true, chapter + "-investigation");
+        await download_pdf(gen_url(base_url, undefined, chapter, undefined, "_inv"), true, chapter + "-investigation");
         await download_pdf(gen_url(base_url, undefined, chapter, undefined, "_summary"), true, chapter + "-summary");
-        await download_pdf(gen_url(base_url, undefined, chapter, undefined, "_sq")     , true, chapter + "-self_quiz");
-        await download_pdf(gen_url(base_url, undefined, chapter, undefined, "_review") , true, chapter + "-review");
+        await download_pdf(gen_url(base_url, undefined, chapter, undefined, "_sq"), true, chapter + "-self_quiz");
+        await download_pdf(gen_url(base_url, undefined, chapter, undefined, "_review"), true, chapter + "-review");
 
         section = 1;
         chapter++;
@@ -117,28 +116,28 @@ async function download_pdf(url, validate_url, file_name) {
         console.log("Downloading unit " + unit + "...")
 
         // Unit start
-        await download_pdf(gen_url(base_url, unit, undefined, undefined, "_open")   , false, "u-" + unit + "-open");
+        await download_pdf(gen_url(base_url, unit, undefined, undefined, "_open"), false, "u-" + unit + "-open");
 
         // Unit extras
-        await download_pdf(gen_url(base_url, unit, undefined, undefined, "_ut")    , true, "u-" + unit + "-tasks");
-        await download_pdf(gen_url(base_url, unit, undefined, undefined, "_sq")    , true, "u-" + unit + "-self_quiz");
+        await download_pdf(gen_url(base_url, unit, undefined, undefined, "_ut"), true, "u-" + unit + "-tasks");
+        await download_pdf(gen_url(base_url, unit, undefined, undefined, "_sq"), true, "u-" + unit + "-self_quiz");
         await download_pdf(gen_url(base_url, unit, undefined, undefined, "_review"), true, "u-" + unit + "-review");
 
         unit++;
     }
 
-    // Appendices TODO
+    // Appendices
     let letter;
     let appendex_index = 0;
     while (await pdf_exists(gen_url(base_url, undefined, undefined, undefined, "_app_" + (letter = String.fromCharCode(65 + appendex_index).toLowerCase())))) {
         await download_pdf(gen_url(base_url, undefined, undefined, undefined, "_app_" + letter), false, "appendix_" + letter);
         appendex_index++;
     }
-    
+
     // Textbook extras
-    await download_pdf(gen_url(base_url, undefined, undefined, undefined, "_glossary")   , true, "glossary");
-    await download_pdf(gen_url(base_url, undefined, undefined, undefined, "_index")   , true, "index");
-    await download_pdf(gen_url(base_url, undefined, undefined, undefined, "_credits")   , true, "credits");
-    
+    await download_pdf(gen_url(base_url, undefined, undefined, undefined, "_glossary"), true, "glossary");
+    await download_pdf(gen_url(base_url, undefined, undefined, undefined, "_index"), true, "index");
+    await download_pdf(gen_url(base_url, undefined, undefined, undefined, "_credits"), true, "credits");
+
     console.log("---------- PDF download complete")
 }
