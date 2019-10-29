@@ -1,15 +1,12 @@
-# Nelson online textbook scraper
+# Nelson Online Student Textbook Scraper
 
-Scrapes the Nelson textbooks into pdfs because their web interface is horrible
+Scrapes Nelson Student Textbooks into PDFs because their web interface is horrible
 
 ## Usage
 
-### **Nelson account needed** as their pdfs cannot be accessed without logging in
-
-### You **must already possess the digital textbook** in your Nelson account
+**Nelson Textbook Code(s) Needed** as their pdfs cannot be accessed without first obtaining a code
 
 1. Log in through Nelson's website to access their [dashboard](https://www.mynelson.com/mynelson/staticcontent/html/PublicLogin.html)
-
 2. Open your textbook of choice and open any PDF within it
 3. Open your web browser's console
    * `Ctrl + Shift + i` for Google Chrome
